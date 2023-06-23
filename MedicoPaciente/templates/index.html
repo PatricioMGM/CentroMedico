@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido Dr. Nombre</title>
-    <link rel="stylesheet" href="Index.css"> 
+    <title>Bienvenido Dr</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Index.css') }}">
 </head>
 <body>
     {%with mensajes= get_flashed_messages() %}
         {%if mensajes%}
             {%for msj in mensajes%}
-                <h3>{{ msj }}</h3>
+                <h1>{{ msj }}</h1>
             {%endfor%}
         {%endif%}
     {%endwith%}
@@ -19,16 +19,19 @@
     <form action="/ingresar" method="POST"> 
         <div class="Formulario">
             <h1> Inicio de Sesión</h1>
-            <div class="username">
-                <input type="text" name="rfc" required>
-                <label>RFC</label>
-            </div>
-            <div class="password">
-                <input type="password" name="password" required>
-                <label>Contraseña</label>
-            </div>
-            <button type="submit"> Iniciar </button>
-        </div> 
-    </form> 
+            <form method="post">
+                <div class="username">
+                    <input type="text" name="rfc" required>
+                    <label>RFC</label>
+                </div>
+                <div class="username">
+                    <input type="password" name="password" required>
+                    <label>contraseña</label>
+                </div>
+                <button type="submit"> Iniciar </button>
+                <br>
+            </form>
+        </div>  
+    </form>
 </body>
 </html>

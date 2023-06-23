@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_mysqldb import MySQL
 
 # Inicialización del servidor Flask
-app = Flask(__name__)
+app = Flask(__name__, static_folder='public', template_folder='templates')
 app.config['MYSQL_HOST'] = "localhost"
 app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = ""
@@ -12,7 +12,7 @@ app.secret_key = 'mysecretkey'
 
 mysql = MySQL(app)
 
-# ----------------
+# -----------------------------------------------------------------------------
 
 @app.route('/ListaDr')
 def ListaDr():
@@ -20,7 +20,7 @@ def ListaDr():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('Index.html')
 
 @app.route('/ingresar', methods=['POST'])
 def ingresar():
@@ -30,7 +30,7 @@ def ingresar():
 
     usu = {
     'RFCA1234': 'Admin1',
-    'RFCM1234': 'Medico1',
+    'RFCM1234': 'Medico1'
     }
 
     if Vrfc == 'RFCA1234':
@@ -47,8 +47,12 @@ def ingresar():
         else: 
             flash('Usuario o contraseña incorrectos')
             return redirect(url_for('index'))
+    else:
+        flash('Usuario o contraseña incorrectos')
+        return redirect(url_for('index'))
 
-# ----------------
+# -----------------------------------------------------------------------------
 
 if __name__ == '__main__':
     app.run(port=4000, debug=True)
+
